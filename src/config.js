@@ -1,4 +1,4 @@
-import StartScene from "./Scene"
+import StartScene from "./scenes/StartScene"
 
 export default {
   type: Phaser.AUTO,
