@@ -2,19 +2,33 @@ import config from "../config"
 
 class StartScene extends Phaser.Scene {
   constructor(){
-    super("Game")
+    super("Start")
   }
 
   preload() {
-    this.load.image("bg", "assets/img/background.png")
   }
   
   create() {
-    this.createBackground()
+    this.add.sprite(0, 0, "bg").setOrigin(0)
+    this.createText()
+    this.start()
   }
 
-  createBackground() {
-    this.add.sprite(0, 0, "bg").setOrigin(0)
+  start() {
+    this.addEvent()
+  }
+
+  addEvent() {
+    this.input.on("pointerdown", () => {
+      this.scene.start("Game")
+    })
+  }
+
+  createText() {
+    this.add.text(config.width / 2, 500, "Tap to Start", {
+      font: "40px CurseCasual",
+      fill: "#fff",
+    }).setOrigin(.5)
   }
 }
 
