@@ -6,11 +6,10 @@ class PreloadScene extends Phaser.Scene {
   }
 
   preload() {
+    this.load.atlas("dragon", "assets/img/dragon.png", "assets/img/dragon.json")
   }
 
   create() {
-    console.log('preloadscene');
-
     this.scene.start("Start")
   }
 }

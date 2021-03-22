@@ -16,6 +16,7 @@ class StartScene extends Phaser.Scene {
 
   start() {
     this.addEvent()
+    this.scene.start("Game")
   }
 
   addEvent() {

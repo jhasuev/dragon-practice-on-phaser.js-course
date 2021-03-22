@@ -13,4 +13,10 @@ export default {
     StartScene,
     GameScene,
   ],
+  physics: {
+    default: "arcade",
+    arcade: {
+      debug: false,
+    },
+  },
 }
