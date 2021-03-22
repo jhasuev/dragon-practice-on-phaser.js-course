@@ -1,14 +1,12 @@
-class Player extends Phaser.GameObjects.Sprite {
+import Enemy from "./Enemy"
+
+class Player extends Enemy {
   constructor(scene) {
     super(scene, 0, 0, "dragon", "dragon1")
-    this.scene = scene
-    this.init()
   }
 
   init() {
-    this.scene.add.existing(this).setOrigin(0)
-    this.scene.physics.add.existing(this)
-    this.body.enable = true
+    super.init()
     this.velocity = 500
   }
 
