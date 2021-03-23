@@ -1,4 +1,5 @@
 import Enemy from "./Enemy"
+import Fires from "../prefabs/Fires"
 
 class Player extends Enemy {
   constructor(scene) {
@@ -8,6 +9,19 @@ class Player extends Enemy {
   init() {
     super.init()
     this.velocity = 500
+
+    this.fires = new Fires(this.scene)
+
+    this.timer = this.scene.time.addEvent({
+      delay: 1000,
+      loop: true,
+      callback: this.fire,
+      callbackScope: this,
+    })
+  }
+
+  fire() {
+    this.fires.createFire(this)
   }
 
   move() {
