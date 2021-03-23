@@ -1,6 +1,7 @@
 import config from "../config"
 import Player from "../prefabs/Player"
 import Enemy from "../prefabs/Enemy"
+import Enemies from "../prefabs/Enemies"
 
 class GameScene extends Phaser.Scene {
   constructor() {
@@ -14,12 +15,11 @@ class GameScene extends Phaser.Scene {
   create() {
     this.createBackground()
     this.player = new Player(this, 1000, 555, "enemy", "enemy1")
-    this.enemy = new Enemy(this, 1000, 555, "enemy", "enemy1")
+    this.enemies = new Enemies(this)
   }
 
   update() {
     this.player.move()
-    this.enemy.move()
     this.bg.tilePositionX += .5
   }
 
