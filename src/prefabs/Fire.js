@@ -1,17 +1,10 @@
 import config from "../config"
-class Fire extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, texture) {
-    super(scene, x, y, texture)
-    this.scene = scene
-    this.init()
-  }
+import MovableObject from "../prefabs/MovableObject"
 
+class Fire extends MovableObject {
   init() {
-    this.scene.add.existing(this)
-    this.scene.physics.add.existing(this)
+    super.init()
     this.velocity = 200 * 4
-
-    this.scene.events.on("update", this.update, this)
   }
 
   static generateData(source) {
@@ -29,28 +22,13 @@ class Fire extends Phaser.GameObjects.Sprite {
     return new this(scene, data.x, data.y, "fire")
   }
 
-  update() {
-    if (this.active && this.x < -this.width || this.x > config.width) {
-      this.setAlive(false)
-    }
+  isDead() {
+    return this.x < -this.width || this.x > config.width
   }
 
   restart(source) {
     const data = Fire.generateData(source)
-    this.x = data.x
-    this.y = data.y
-
-    this.setAlive(true)
-  }
-
-  setAlive(status) {
-    this.body.enable = status
-    this.setVisible(status)
-    this.setActive(status)
-  }
-
-  move() {
-    this.body.setVelocityX(this.velocity)
+    super.restart(data)
   }
 }
 

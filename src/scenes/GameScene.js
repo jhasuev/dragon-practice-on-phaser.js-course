@@ -1,6 +1,5 @@
 import config from "../config"
 import Player from "../prefabs/Player"
-import Enemy from "../prefabs/Enemy"
 import Enemies from "../prefabs/Enemies"
 
 class GameScene extends Phaser.Scene {
