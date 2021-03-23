@@ -3,12 +3,18 @@ import Fires from "../prefabs/Fires"
 
 class Player extends Enemy {
   constructor(scene) {
-    super(scene, 0, 0, "dragon", "dragon1")
+    super({
+      scene,
+      x: 111,
+      y: 111,
+      texture: "dragon",
+      frame: "dragon1",
+      velocity: 222
+    })
   }
 
-  init() {
-    super.init()
-    this.velocity = 500
+  init(data) {
+    super.init(data)
 
     this.fires = new Fires(this.scene)
 

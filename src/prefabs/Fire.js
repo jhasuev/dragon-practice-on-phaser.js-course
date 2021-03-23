@@ -2,24 +2,28 @@ import config from "../config"
 import MovableObject from "../prefabs/MovableObject"
 
 class Fire extends MovableObject {
-  init() {
-    super.init()
-    this.velocity = 200 * 4
+  init(data) {
+    super.init(data)
   }
 
   static generateData(source) {
     return {
-      scene: this.scene,
       x: source.x + source.width,
       y: source.y + source.height / 2,
       texture: "fire",
-      velocity: this.velocity,
+      velocity: 1000,
     }
   }
 
   static generate(scene, source) {
     const data = this.generateData(source)
-    return new this(scene, data.x, data.y, "fire")
+    return new this({
+      scene,
+      x: data.x,
+      y: data.y,
+      texture: data.texture,
+      velocity: data.velocity
+    })
   }
 
   isDead() {

@@ -12,13 +12,20 @@ class Enemy extends MovableObject {
 
   static generate(scene) {
     const data = Enemy.generateData()
-    return new this(scene, data.x, data.y, "enemy", `enemy${data.id}`)
+    
+    return new this({
+      scene,
+      x: data.x,
+      y: data.y,
+      texture: "enemy",
+      frame: `enemy${data.id}`,
+      velocity: -222
+    })
   }
 
-  init() {
-    super.init()
+  init(data) {
+    super.init(data)
     this.setOrigin(0)
-    this.velocity = -200 * 4
   }
 
   isDead() {

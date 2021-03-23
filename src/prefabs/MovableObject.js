@@ -1,15 +1,15 @@
 class MovableObject extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, texture, frame = undefined) {
-    super(scene, x, y, texture, frame)
-    this.scene = scene
-    this.init()
+  constructor(data) {
+    super(data.scene, data.x, data.y, data.texture, data.frame)
+    this.init(data)
   }
 
-  init() {
+  init(data) {
     this.scene.add.existing(this)
     this.scene.physics.add.existing(this)
     this.body.enable = true
-    this.velocity = 200
+    this.velocity = data.velocity
+    this.scene = data.scene
 
     this.scene.events.on("update", this.update, this)
   }

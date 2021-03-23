@@ -13,7 +13,7 @@ class GameScene extends Phaser.Scene {
 
   create() {
     this.createBackground()
-    this.player = new Player(this, 1000, 555, "enemy", "enemy1")
+    this.player = new Player(this)
     this.enemies = new Enemies(this)
   }
 
