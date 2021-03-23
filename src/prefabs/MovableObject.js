@@ -14,9 +14,9 @@ class MovableObject extends Phaser.GameObjects.Sprite {
     this.scene.events.on("update", this.update, this)
   }
 
-  restart(data) {
-    this.x = data.x
-    this.y = data.y
+  restart(x, y) {
+    this.x = x
+    this.y = y
 
     this.setAlive(true)
   }

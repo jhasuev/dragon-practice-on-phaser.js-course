@@ -34,7 +34,7 @@ class Enemy extends MovableObject {
 
   restart() {
     const data = Enemy.generateData()
-    super.restart(data)
+    super.restart(data.x, data.y)
     this.setFrame(`enemy${data.id}`)
   }
 }

@@ -32,7 +32,7 @@ class Fire extends MovableObject {
 
   restart(source) {
     const data = Fire.generateData(source)
-    super.restart(data)
+    super.restart(data.x, data.y)
   }
 }
 
