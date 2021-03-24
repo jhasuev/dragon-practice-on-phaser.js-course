@@ -1,5 +1,6 @@
 import config from "../config"
 import MovableObject from "../prefabs/MovableObject"
+import Fires from "../prefabs/Fires"
 
 class Enemy extends MovableObject {
   static generateData() {
@@ -19,13 +20,30 @@ class Enemy extends MovableObject {
       y: data.y,
       texture: "enemy",
       frame: `enemy${data.id}`,
-      velocity: -222
+      velocity: -222,
+      bullet: {velocity: -500, delay: 1000, texture: "bullet"},
+      origin: {x: 0, y: 0.5},
     })
   }
 
   init(data) {
     super.init(data)
-    this.setOrigin(0)
+    this.setOrigin(data.origin.x, data.origin.y)
+
+    this.fires = new Fires(this.scene)
+
+    this.timer = this.scene.time.addEvent({
+      delay: data.bullet.delay,
+      loop: true,
+      callback: this.fire,
+      callbackScope: this,
+    })
+
+    this.bullet = data.bullet
+  }
+
+  fire() {
+    this.fires.createFire(this)
   }
 
   isDead() {

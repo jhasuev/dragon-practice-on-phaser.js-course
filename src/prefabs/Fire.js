@@ -8,10 +8,10 @@ class Fire extends MovableObject {
 
   static generateData(source) {
     return {
-      x: source.x + source.width,
-      y: source.y + source.height / 2,
-      texture: "fire",
-      velocity: 1000,
+      x: source.x,
+      y: source.y,
+      texture: source.bullet.texture,
+      velocity: source.bullet.velocity,
     }
   }
 

@@ -1,33 +1,17 @@
 import Enemy from "./Enemy"
-import Fires from "../prefabs/Fires"
 
 class Player extends Enemy {
   constructor(scene) {
     super({
       scene,
-      x: 111,
-      y: 111,
+      x: 250,
+      y: 250,
       texture: "dragon",
       frame: "dragon1",
-      velocity: 222
+      velocity: 222,
+      bullet: { velocity: 750, delay: 500, texture: "fire" },
+      origin: { x: 1, y: 0.5 },
     })
-  }
-
-  init(data) {
-    super.init(data)
-
-    this.fires = new Fires(this.scene)
-
-    this.timer = this.scene.time.addEvent({
-      delay: 1000,
-      loop: true,
-      callback: this.fire,
-      callbackScope: this,
-    })
-  }
-
-  fire() {
-    this.fires.createFire(this)
   }
 
   move() {
