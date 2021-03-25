@@ -9,6 +9,10 @@ class GameScene extends Phaser.Scene {
 
   init() {
     this.cursors = this.input.keyboard.createCursorKeys()
+    this.scores = 0
+    this.textStyles = {
+      font: "30px CurseCasual"
+    }
   }
 
   create() {
@@ -16,7 +20,22 @@ class GameScene extends Phaser.Scene {
     this.player = new Player(this)
     this.enemies = new Enemies(this)
     this.createCompleteEvents()
+    this.createText()
     this.addOverlap()
+  }
+
+  createText() {
+    this.infoText = this.add.text(15, config.height - 10, "", this.textStyles).setOrigin(0, 1)
+    this.updateText()
+  }
+
+  updateText() {
+    this.infoText.setText(`Scores: ${this.scores}`)
+  }
+
+  addScore() {
+    this.scores += 1
+    this.updateText()
   }
 
   addOverlap() {
@@ -28,6 +47,10 @@ class GameScene extends Phaser.Scene {
   onOverlap(source, target) {
     source.setAlive(false)
     target.setAlive(false)
+
+    if (![source, target].includes(this.player)) {
+      this.addScore()
+    }
   }
 
   createCompleteEvents() {
@@ -36,8 +59,10 @@ class GameScene extends Phaser.Scene {
   }
 
   onComplete() {
-    this.scene.start("Start")
-    console.log("onComplete");
+    this.scene.start("Start", {
+      scores: this.scores,
+      completed: this.player.active
+    })
   }
 
   update() {
