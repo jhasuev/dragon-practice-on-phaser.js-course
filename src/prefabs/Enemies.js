@@ -1,11 +1,14 @@
 import Enemy from "./Enemy"
+import Fires from "./Fires"
 
 class Enemies extends Phaser.Physics.Arcade.Group {
   constructor(scene) {
-    super()
+    super(scene.physics.world, scene)
     this.scene = scene
-    this.countMax = 3
+    this.countMax = 10
     this.countCreated = 0
+    this.countKilled = 0
+    this.fires = new Fires(this.scene)
     this.createTimer()
   }
 
@@ -26,10 +29,17 @@ class Enemies extends Phaser.Physics.Arcade.Group {
     }
   }
 
+  onEnemyKilled() {
+    if (++this.countKilled >= this.countMax) {
+      this.scene.events.emit("enemies-killed")
+    }
+  }
+
   createEnemy() {
     let enemy = this.getFirstDead()
     if (!enemy) {
-      enemy = Enemy.generate(this.scene)
+      enemy = Enemy.generate(this.scene, this.fires)
+      enemy.on("killed", this.onEnemyKilled, this)
       this.add(enemy)
     } else {
       enemy.restart()

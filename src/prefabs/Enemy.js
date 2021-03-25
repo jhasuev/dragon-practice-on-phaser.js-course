@@ -11,11 +11,12 @@ class Enemy extends MovableObject {
     return {x, y, id}
   }
 
-  static generate(scene) {
+  static generate(scene, fires) {
     const data = Enemy.generateData()
     
     return new this({
       scene,
+      fires,
       x: data.x,
       y: data.y,
       texture: "enemy",
@@ -30,7 +31,7 @@ class Enemy extends MovableObject {
     super.init(data)
     this.setOrigin(data.origin.x, data.origin.y)
 
-    this.fires = new Fires(this.scene)
+    this.fires = data.fires || new Fires(this.scene)
 
     this.timer = this.scene.time.addEvent({
       delay: data.bullet.delay,
