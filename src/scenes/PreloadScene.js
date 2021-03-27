@@ -1,4 +1,5 @@
 import config from "../config"
+import LoadingBar from "../classes/LoadingBar"
 
 class PreloadScene extends Phaser.Scene {
   constructor() {
@@ -6,6 +7,13 @@ class PreloadScene extends Phaser.Scene {
   }
 
   preload() {
+    this.add.sprite(0, 0, "bg").setOrigin(0)
+    const loadingBar = new LoadingBar(this)
+
+    this.preloadAssets()
+  }
+
+  preloadAssets() {
     this.load.atlas("dragon", "assets/img/dragon.png", "assets/img/dragon.json")
     this.load.atlas("enemy", "assets/img/enemy.png", "assets/img/enemy.json")
     this.load.atlas("boom", "assets/img/boom.png", "assets/img/boom.json")
@@ -16,6 +24,7 @@ class PreloadScene extends Phaser.Scene {
   }
 
   create() {
+    // загрузка ассетов полностью завершена
     this.scene.start("Start")
   }
 }

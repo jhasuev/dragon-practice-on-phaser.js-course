@@ -26,7 +26,7 @@ class StartScene extends Phaser.Scene {
   
   createStat(data) {
     const graphics = this.add.graphics()
-    graphics.fillStyle("#000", .5)
+    graphics.fillStyle(0x000000, .5)
     graphics.fillRoundedRect(config.width / 2 - 200, config.height / 2 - 200, 400, 400)
 
     const textTitle = data.completed ? "You win" : "Game over"
