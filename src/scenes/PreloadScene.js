@@ -11,6 +11,8 @@ class PreloadScene extends Phaser.Scene {
     this.load.atlas("boom", "assets/img/boom.png", "assets/img/boom.json")
     this.load.image("fire", "assets/img/fire.png")
     this.load.image("bullet", "assets/img/bullet.png")
+    this.load.audio("theme", "assets/sounds/theme.mp3")
+    this.load.audio("boom", "assets/sounds/boom.mp3")
   }
 
   create() {

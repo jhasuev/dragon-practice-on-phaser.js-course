@@ -18,11 +18,23 @@ class GameScene extends Phaser.Scene {
 
   create() {
     this.createBackground()
+    if (!this.sounds) {
+      this.createSounds()
+    }
     this.player = new Player(this)
     this.enemies = new Enemies(this)
     this.createCompleteEvents()
     this.createText()
     this.addOverlap()
+  }
+
+  createSounds() {
+    this.sounds = {
+      "theme": this.sound.add("theme", { volume: .2, loop: true }),
+      "boom": this.sound.add("boom", { volume: .1 }),
+    }
+
+    this.sounds.theme.play()
   }
 
   createText() {
@@ -50,6 +62,7 @@ class GameScene extends Phaser.Scene {
     if (enemy) {
       this.addScore()
       Boom.generate(this, enemy.x, enemy.y)
+      this.sounds.boom.play()
     }
 
     source.setAlive(false)
