@@ -26,6 +26,7 @@ class PreloadScene extends Phaser.Scene {
   create() {
     // загрузка ассетов полностью завершена
     this.scene.start("Start")
+    document.body.classList.add("loaded")
   }
 }
 
