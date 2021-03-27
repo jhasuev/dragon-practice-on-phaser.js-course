@@ -1,6 +1,7 @@
 import config from "../config"
 import Player from "../prefabs/Player"
 import Enemies from "../prefabs/Enemies"
+import Boom from "../prefabs/Boom"
 
 class GameScene extends Phaser.Scene {
   constructor() {
@@ -45,12 +46,14 @@ class GameScene extends Phaser.Scene {
   }
 
   onOverlap(source, target) {
+    const enemy = [source, target].find(item => item.texture.key === "enemy")
+    if (enemy) {
+      this.addScore()
+      Boom.generate(this, enemy.x, enemy.y)
+    }
+
     source.setAlive(false)
     target.setAlive(false)
-
-    if (![source, target].includes(this.player)) {
-      this.addScore()
-    }
   }
 
   createCompleteEvents() {
